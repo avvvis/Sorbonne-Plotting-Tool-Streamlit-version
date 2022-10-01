@@ -39,9 +39,9 @@ def animation(form, eqt, var, clicked_grid, deltaX, deltaY,tmin,tmax):
     X1, X2, Dcoord1, Dcoord2 = array(form[0]), array(form[1]), form[2], form[3]
 
     # enables plotting or not plotting the Grid
-    if clicked_grid.get() == True:
+    if clicked_grid == True:
         Xg, Yg = plot_mgrid(Dcoord1, Dcoord2, 100)
-    elif clicked_grid.get() == False:
+    elif clicked_grid == False:
         Xg, Yg = nan, nan
 
     # initialising figure and the things we want to plot
@@ -71,13 +71,12 @@ def animation(form, eqt, var, clicked_grid, deltaX, deltaY,tmin,tmax):
 
         # setting parameters of the plot
         plt.grid("--")
-        plt.xlim(-deltaX, deltaX)
-        plt.ylim(-deltaY, deltaY)
+        plt.xlim(-200, 200)
+        plt.ylim(-200, 200)
         plt.axis("scaled")
 
         return contour_0, contour, grid_0, grid,
 
-    ani = mplani.FuncAnimation(fig, animate, frames= arange(tmin, tmax, 0.1), blit=False, interval=10, repeat=False)
-    plt.show()
-    # closes those wierd windows that jump out every second time
-    # if you have any idea how to fix that, please do it, I did all I could
+    ani = mplani.FuncAnimation(fig, animate, frames= arange(tmin, tmax, 0.05), blit=False, interval=10, repeat=False)
+
+    return ani
