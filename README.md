@@ -1,1 +1,5 @@
 - requirements.txt - Some magic commands that make this whole thing work
+- main.py - main file
+- animation.py - file with animation function
+- form_functions.py - file with functions that make figures
+- pages folder - it contains code of the pages availible on the website's sidebar
