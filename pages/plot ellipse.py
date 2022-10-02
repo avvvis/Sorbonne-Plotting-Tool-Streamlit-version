@@ -42,7 +42,7 @@ def make_ellipse_changed(var, eq):
         i[1] = i[1].replace(" ", "")
         e[i[0]] = i[1]
 
-    circle_ani = ani.animation(ff.ellipse(xc, yc, a, b, 100), e, v, grid_cb, 120, 120, 0, 5)
+    circle_ani = ani.animation(ff.ellipse(xc, yc, a, b, 100), e, v, grid_cb, 120, 120, 0, 10)
     # following line shows animation on the website
     components.html(circle_ani.to_jshtml(), height=1000)
 
@@ -83,6 +83,3 @@ setp(ax.get_yticklabels()[1::2], visible=False)
 
 # plotting figure after change with animation
 make_ellipse_changed(variables, equations)
-
-
-
