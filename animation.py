@@ -8,7 +8,13 @@ from form_functions import *
 from numpy import *
 import matplotlib.pyplot as plt
 import matplotlib.animation as mplani
+from matplotlib.axes import*
+from math import*
+import streamlit as st
+import streamlit.components.v1 as components
+import time
 
+old_text = 0
 
 # an animation of a specified form (see form_functions)
 # delta = plot window size (from (0-delta, 0-delta) to (0+delta, 0+delta))
@@ -55,9 +61,25 @@ def animation(form, eqt, var, clicked_grid, deltaX, deltaY,tmin,tmax):
     grid, = plt.plot([], [], color='k')
     grid_0, = plt.plot([], [], color='b')
 
+    my_bar = st.progress(tmin)
+
     # defining the animation function
     def animate(i):
+        global old_text
         t = i
+        t = round(t, 2)
+        print(t)
+        if old_text != 0:
+            try:
+                old_text.remove()
+            except:
+                pass
+
+        text = plt.text(x=-150, y=-150, s=f"time = {t}")
+
+        if t <= tmax:
+            prog = (t/tmax)
+            my_bar.progress(prog)
 
         x1 = transform_x1(X1, X2, 0, t)
         x2 = transform_x2(X1, X2, 0, t)
@@ -70,13 +92,16 @@ def animation(form, eqt, var, clicked_grid, deltaX, deltaY,tmin,tmax):
         grid_0.set_data(Xg, Yg)
 
         # setting parameters of the plot
-        plt.grid("--")
+        plt.grid("-")
         plt.xlim(-200, 200)
         plt.ylim(-200, 200)
         plt.axis("scaled")
 
+        old_text = plt.text(x=-150, y=-150, s=f"time = {t}")
+        text.remove()
+
         return contour_0, contour, grid_0, grid,
 
-    ani = mplani.FuncAnimation(fig, animate, frames= arange(tmin, tmax, 0.05), blit=False, interval=10, repeat=False)
+    ani = mplani.FuncAnimation(fig, animate, frames= arange(tmin, tmax+1, 0.1), blit=False, interval=10, repeat=False)
 
     return ani
