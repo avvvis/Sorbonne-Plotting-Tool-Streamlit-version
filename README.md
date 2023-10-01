@@ -1,4 +1,4 @@
-- requirements.txt - Some magic commands that make this whole thing work
+- requirements.txt - streamlit set-up
 - main.py - main file
 - animation.py - file with animation function
 - form_functions.py - file with functions that make figures
